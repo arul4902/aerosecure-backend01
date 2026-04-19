@@ -1,0 +1,41 @@
+package com.aerosecure.security;
+
+import com.aerosecure.dto.ApiResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+/**
+ * Entry point for unauthenticated requests. Returns 401 Unauthorized response.
+ */
+@Component
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
+
+    @Override
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) throws IOException, ServletException {
+        logger.error("Unauthorized access attempt: {}", authException.getMessage());
+
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+        ApiResponse<Void> apiResponse = ApiResponse.error("Unauthorized. Please provide a valid JWT token.");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.writeValue(response.getOutputStream(), apiResponse);
+    }
+}
