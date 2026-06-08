@@ -53,12 +53,16 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/error").permitAll()
 
                         // Aircraft endpoints - role-based access
                         .requestMatchers(HttpMethod.POST, "/api/aircraft/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/aircraft/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/aircraft/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/aircraft/**").hasAnyRole("ADMIN", "ENGINEER")
+
+                        // User endpoints - role-based access
+                        .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
 
                         // All other requests require authentication
                         .anyRequest().authenticated()
