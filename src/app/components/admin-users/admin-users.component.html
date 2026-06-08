@@ -1,0 +1,78 @@
+<div class="container fade-in page-content">
+  <div class="header-section">
+    <div>
+      <h1>User Administration</h1>
+      <p class="text-secondary">Register and manage system roles</p>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+    <div class="card form-card">
+      <div class="card-header">
+        <h3>Create New Engineer Account</h3>
+        <p class="text-secondary">System engineers have read-only access to view and filter the aircraft fleet</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <div class="alert alert-success" *ngIf="successMessage">
+          <span>{{ successMessage }}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="form-control" 
+            placeholder="e.g. jdoe_engineer" 
+            [(ngModel)]="username" 
+            required 
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-control" 
+            placeholder="Min 6 characters" 
+            [(ngModel)]="password" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            class="form-control" 
+            placeholder="Confirm password" 
+            [(ngModel)]="confirmPassword" 
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Assigned Role</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            value="ROLE_ENGINEER" 
+            disabled>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Register Engineer</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

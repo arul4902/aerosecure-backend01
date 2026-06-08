@@ -1,0 +1,45 @@
+<div class="login-wrapper">
+  <div class="login-card fade-in">
+    <div class="login-header">
+      <span class="logo-symbol">▲</span>
+      <h2>AeroSecure Login</h2>
+      <p>Fleet & Compliance Management System</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          class="form-control" 
+          placeholder="Enter username" 
+          [(ngModel)]="username" 
+          required 
+          autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-control" 
+          placeholder="Enter password" 
+          [(ngModel)]="password" 
+          required>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Log In</span>
+        <span *ngIf="isLoading" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+</div>
