@@ -1,24 +1,27 @@
-<nav class="navbar" *ngIf="authService.isAuthenticated()">
-  <div class="nav-container">
-    <div class="nav-brand" routerLink="/dashboard">
-      <span class="brand-icon">▲</span>
-      <span class="brand-text">AeroSecure</span>
+<nav class="navbar navbar-expand navbar-dark bg-dark border-bottom border-secondary sticky-top px-3" *ngIf="authService.isAuthenticated()">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class="navbar-brand d-flex align-items-center gap-2" routerLink="/dashboard" style="cursor: pointer;">
+      <span class="text-primary fs-4" style="text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);">▲</span>
+      <span class="fw-bold text-light">AeroSecure</span>
     </div>
     
-    <div class="nav-links">
-      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Fleet Dashboard</a>
-      <a *ngIf="authService.isAdmin()" routerLink="/admin/users" routerLinkActive="active" class="nav-link">User Admin</a>
+    <div class="navbar-nav d-flex gap-3">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link text-secondary">Fleet Dashboard</a>
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/users" routerLinkActive="active" class="nav-link text-secondary">User Admin</a>
     </div>
 
-    <div class="nav-user">
-      <div class="user-info">
-        <span class="username">{{ authService.getUsername() }}</span>
-        <span class="role-badge" [class.badge-admin]="authService.isAdmin()">
+    <div class="d-flex align-items-center gap-3">
+      <div class="d-flex flex-column align-items-end lh-sm">
+        <span class="fw-bold text-light small">{{ authService.getUsername() }}</span>
+        <span class="badge rounded-pill bg-dark border border-secondary text-secondary small" 
+              [class.bg-primary-subtle]="authService.isAdmin()" 
+              [class.text-primary]="authService.isAdmin()" 
+              [class.border-primary]="authService.isAdmin()">
           {{ authService.isAdmin() ? 'Admin' : 'Engineer' }}
         </span>
       </div>
-      <button (click)="logout()" class="logout-btn" title="Logout">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logout-icon">
+      <button (click)="logout()" class="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center" title="Logout" style="width: 36px; height: 36px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           <polyline points="16 17 21 12 16 7"></polyline>
           <line x1="21" y1="12" x2="9" y2="12"></line>

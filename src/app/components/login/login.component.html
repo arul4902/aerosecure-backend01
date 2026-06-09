@@ -1,44 +1,44 @@
-<div class="login-wrapper">
-  <div class="login-card fade-in">
-    <div class="login-header">
-      <span class="logo-symbol">▲</span>
-      <h2>AeroSecure Login</h2>
-      <p>Fleet & Compliance Management System</p>
+<div class="d-flex align-items-center justify-content-center min-vh-100 p-4" style="background: radial-gradient(circle at center, var(--bs-tertiary-bg) 0%, var(--bs-body-bg) 100%);">
+  <div class="card p-4 p-md-5 w-100 shadow" style="max-width: 420px; border-radius: 20px;">
+    <div class="text-center mb-4">
+      <span class="text-primary fs-1 d-inline-block mb-2" style="text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);">▲</span>
+      <h2 class="text-light fs-4 fw-bold">AeroSecure Login</h2>
+      <p class="text-secondary small">Fleet & Compliance Management System</p>
     </div>
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <div class="alert alert-danger" *ngIf="errorMessage">
+      <div class="alert alert-danger mb-3 d-flex align-items-center gap-2" *ngIf="errorMessage">
         <span>{{ errorMessage }}</span>
       </div>
 
-      <div class="form-group">
-        <label for="username" class="form-label">Username</label>
+      <div class="mb-3">
+        <label for="username" class="form-label text-secondary small fw-semibold">Username</label>
         <input 
           type="text" 
           id="username" 
           name="username" 
-          class="form-control" 
+          class="form-control bg-dark border-secondary text-light p-3" 
           placeholder="Enter username" 
           [(ngModel)]="username" 
           required 
           autocomplete="off">
       </div>
 
-      <div class="form-group">
-        <label for="password" class="form-label">Password</label>
+      <div class="mb-4">
+        <label for="password" class="form-label text-secondary small fw-semibold">Password</label>
         <input 
           type="password" 
           id="password" 
           name="password" 
-          class="form-control" 
+          class="form-control bg-dark border-secondary text-light p-3" 
           placeholder="Enter password" 
           [(ngModel)]="password" 
           required>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading">
+      <button type="submit" class="btn btn-primary w-100 p-3 fw-bold" [disabled]="isLoading">
         <span *ngIf="!isLoading">Log In</span>
-        <span *ngIf="isLoading" class="spinner"></span>
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"></span>
       </button>
     </form>
   </div>
